@@ -24,7 +24,7 @@
 1. 克隆项目
 bash
 
-git clone https://github.com/qs21123330/smart-teaching-qa.git
+git clone https://github.com/qaz1122330/smart-teaching-qa.git
 cd smart-teaching-qa
 
 2. 安装依赖
