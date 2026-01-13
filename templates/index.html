@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>智能教学问答系统</title>
+    <style>
+        body { font-family: Arial; max-width: 800px; margin: 40px auto; }
+        .chat-box { border: 1px solid #ccc; padding: 20px; height: 300px; overflow-y: auto; }
+        .input-area { margin-top: 20px; }
+        input { width: 70%; padding: 10px; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; }
+    </style>
+</head>
+<body>
+    <h1>智能教学问答系统</h1>
+    <div class="chat-box" id="chatBox">
+        <p>👋 你好！我是智能教学助手。请提问吧。</p>
+    </div>
+    <div class="input-area">
+        <input type="text" id="questionInput" placeholder="输入问题...">
+        <button onclick="askQuestion()">提问</button>
+    </div>
+
+    <script>
+        async function askQuestion() {
+            const input = document.getElementById('questionInput');
+            const question = input.value;
+            
+            if (!question) return;
+            
+            // 显示问题
+            document.getElementById('chatBox').innerHTML += `<p><strong>你：</strong> ${question}</p>`;
+            input.value = '';
+            
+            // 请求回答
+            const response = await fetch('/api/ask', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({question: question})
+            });
+            
+            const data = await response.json();
+            document.getElementById('chatBox').innerHTML += `<p><strong>助手：</strong> ${data.answer}</p>`;
+        }
+    </script>
+</body>
+</html>
